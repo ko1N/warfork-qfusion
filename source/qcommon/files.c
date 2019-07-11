@@ -2731,6 +2731,7 @@ error:
 *
 * Quick and dirty
 */
+#define IDPAKENTRY_NAME_SIZE 56
 #define IDPAKHEADER     ( ( 'K' << 24 ) + ( 'C' << 16 ) + ( 'A' << 8 ) + 'P' )
 static pack_t *FS_LoadPakFile( const char *packfilename, bool silent ) {
 	unsigned int i, j;
@@ -2742,8 +2743,8 @@ static pack_t *FS_LoadPakFile( const char *packfilename, bool silent ) {
 	pack_t          *pack = NULL;
 	// c++
 	typedef struct { int ident; int dirofs; int dirlen; } fs_header_t;
-	typedef struct { char name[56]; int filepos, filelen; } fs_info_t;
-	typedef struct { char name[56]; } fs_dirs_t;
+	typedef struct { char name[IDPAKENTRY_NAME_SIZE]; int filepos, filelen; } fs_info_t;
+	typedef struct { char name[IDPAKENTRY_NAME_SIZE]; } fs_dirs_t;
 	fs_header_t header;
 	fs_info_t *info = NULL;
 	fs_dirs_t *dirs = NULL;
@@ -2804,6 +2805,9 @@ static pack_t *FS_LoadPakFile( const char *packfilename, bool silent ) {
 			goto error;     // something wrong occured
 
 		}
+				
+		info[i].name[IDPAKENTRY_NAME_SIZE-1] = '\0'; // ensure the trailing \0 is there
+
 		len = strlen( info[i].name );
 		if( !len ) {
 			goto error;     // something wrong occured
