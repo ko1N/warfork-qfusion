@@ -724,7 +724,6 @@ void CG_LaserGunImpact( const vec3_t pos, float radius, const vec3_t laser_dir, 
 	AnglesToAxis( angles, ent.axis );
 
 	trap_R_AddEntityToScene( &ent );
-	CG_SpawnDecal(pos, dir, random() * 360, radius * 0.35f, 1, 1, 1, 1, 2, 1, false, CG_MediaShader(cgs.media.shaderExplosionMark));
 }
 
 /*
