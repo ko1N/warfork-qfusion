@@ -1007,7 +1007,7 @@ void G_AwardFairPlay( edict_t *ent );
 
 //============================================================================
 
-#include "ai/ai.h"
+#include "g_botai.h"
 
 typedef struct {
 	int radius;
