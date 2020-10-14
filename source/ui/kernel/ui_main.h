@@ -40,6 +40,7 @@ class DemosDataSource;
 class ModsDataSource;
 class ModelsDataSource;
 class TVChannelsDataSource;
+class IrcChannelsDataSource;
 class GameAjaxDataSource;
 
 class LevelShotFormatter;
@@ -202,6 +203,7 @@ private:
 	ModsDataSource *mods;
 	ModelsDataSource *playerModels;
 	TVChannelsDataSource *tvchannels;
+	IrcChannelsDataSource *ircchannels;
 	GameAjaxDataSource *gameajax;
 
 	UI_Navigation navigations[UI_NUM_CONTEXTS];
