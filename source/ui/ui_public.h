@@ -38,6 +38,8 @@ enum {
 
 #include "../cgame/ref.h"
 
+struct irc_chat_history_node_s;
+
 //
 // these are the functions exported by the refresh module
 //

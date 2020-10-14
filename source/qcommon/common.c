@@ -798,6 +798,9 @@ void Qcommon_ShutdownCommands( void ) {
 	Cmd_RemoveCommand( "lag" );
 #endif
 
+	Cmd_RemoveCommand( "irc_connect" );
+	Cmd_RemoveCommand( "irc_disconnect" );
+
 	if( dedicated->integer ) {
 		Cmd_RemoveCommand( "quit" );
 	}
@@ -911,6 +914,12 @@ void Qcommon_Init( int argc, char **argv ) {
 
 	com_showtrace =     Cvar_Get( "com_showtrace", "0", 0 );
 	com_introPlayed3 =   Cvar_Get( "com_introPlayed3", "0", CVAR_ARCHIVE );
+
+	Cvar_Get( "irc_server", "irc.warfork.com", CVAR_ARCHIVE );
+	Cvar_Get( "irc_port", "6667", CVAR_ARCHIVE );
+	Cvar_Get( "irc_nick", APPLICATION "Warfork", CVAR_ARCHIVE );
+	Cvar_Get( "irc_user", APPLICATION "Warfork", CVAR_ARCHIVE );
+	Cvar_Get( "irc_password", "", CVAR_ARCHIVE );
 
 	Cvar_Get( "gamename", APPLICATION, CVAR_READONLY );
 	versioncvar = Cvar_Get( "version", APP_VERSION_STR " " CPUSTRING " " __DATE__ " " BUILDSTRING, CVAR_SERVERINFO | CVAR_READONLY );
