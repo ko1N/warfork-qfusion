@@ -27,6 +27,7 @@ APP_MODULES := \
   angelwrap \
   cin \
   ftlib \
+  irc \
   ref_gl \
   snd_openal \
   snd_qf \
