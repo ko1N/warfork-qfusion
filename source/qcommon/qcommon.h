@@ -787,6 +787,7 @@ extern cvar_t *developer;
 extern cvar_t *dedicated;
 extern cvar_t *host_speeds;
 extern cvar_t *versioncvar;
+extern cvar_t *revisioncvar;
 
 // host_speeds times
 extern int64_t time_before_game;
