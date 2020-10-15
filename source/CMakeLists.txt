@@ -79,6 +79,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
         "../libsrcs/src/libvorbis"
         "../libsrcs/src/libtheora"
         "../libsrcs/src/libcurl/include"
+        "../libsrcs/src/zlib"
         "../libsrcs/src/libfreetype"
         "../libsrcs/src/SDL2/include"
         "../libsrcs/src/OpenAL-MOB/include/AL"
