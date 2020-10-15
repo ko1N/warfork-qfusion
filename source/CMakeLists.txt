@@ -63,6 +63,9 @@ set(LIBROCKET_SOURCE_DIR ${LIBROCKET_DIR}/Source)
 set(NANOSVG_DIR ${CMAKE_HOME_DIRECTORY}/../third-party/nanosvg)
 set(NANOSVG_INCLUDE_DIR ${NANOSVG_DIR}/src)
 
+set(STB_DIR ${CMAKE_HOME_DIRECTORY}/../third-party/stb)
+set(STB_INCLUDE_DIR ${STB_DIR})
+
 # Windows specific settings
 if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     set(QFUSION_WINDOWS_ARCH "x86")
