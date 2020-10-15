@@ -1104,7 +1104,7 @@ static void R_Register( const char *screenshotsPrefix ) {
 	r_polyblend = ri.Cvar_Get( "r_polyblend", "1", 0 );
 
 	r_brightness = ri.Cvar_Get( "r_brightness", "0", CVAR_ARCHIVE );
-	r_sRGB = ri.Cvar_Get( "r_sRGB", "1", CVAR_ARCHIVE | CVAR_LATCH_VIDEO );
+	r_sRGB = ri.Cvar_Get( "r_sRGB", "0", CVAR_ARCHIVE | CVAR_LATCH_VIDEO );
 
 	r_detailtextures = ri.Cvar_Get( "r_detailtextures", "1", CVAR_ARCHIVE );
 
@@ -1187,7 +1187,7 @@ static void R_Register( const char *screenshotsPrefix ) {
 	r_hdr_gamma = ri.Cvar_Get( "r_hdr_gamma", "2.2", CVAR_ARCHIVE );
 	r_hdr_exposure = ri.Cvar_Get( "r_hdr_exposure", "1.0", CVAR_ARCHIVE );
 
-	r_bloom = ri.Cvar_Get( "r_bloom", "1", CVAR_ARCHIVE );
+	r_bloom = ri.Cvar_Get( "r_bloom", "0", CVAR_ARCHIVE );
 
 	r_fxaa = ri.Cvar_Get( "r_fxaa", "0", CVAR_ARCHIVE );
 	r_samples = ri.Cvar_Get( "r_samples", "0", CVAR_ARCHIVE );
