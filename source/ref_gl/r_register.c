@@ -1189,7 +1189,7 @@ static void R_Register( const char *screenshotsPrefix ) {
 
 	r_bloom = ri.Cvar_Get( "r_bloom", "0", CVAR_ARCHIVE );
 
-	r_fxaa = ri.Cvar_Get( "r_fxaa", "0", CVAR_ARCHIVE );
+	r_fxaa = ri.Cvar_Get( "r_fxaa", "1", CVAR_ARCHIVE );
 	r_samples = ri.Cvar_Get( "r_samples", "0", CVAR_ARCHIVE );
 	r_samples2D = ri.Cvar_Get( "r_samples2D", "0", CVAR_ARCHIVE );
 
