@@ -34,6 +34,13 @@ end of unit intermissions
 */
 
 #include "cg_local.h"
+#include "../qalgo/rng.h"
+
+template <typename T, size_t N>
+constexpr size_t ARRAY_COUNT( const T ( &arr )[N] )
+{
+    return N;
+}
 
 vrect_t scr_vrect;
 
@@ -908,6 +915,177 @@ void CG_DrawTeamMates( void ) {
 		}
 
 		trap_R_DrawStretchPic( coords[0], coords[1], pic_size, pic_size, 0, 0, 1, 1, color, CG_MediaShader( media ) );
+	}
+}
+
+struct DamageNumber {
+	vec3_t origin;
+	float drift;
+	int64_t t;
+	int damage;
+};
+
+static DamageNumber damage_numbers[ 16 ];
+size_t damage_numbers_head;
+static PCG damage_numbers_rng;
+
+void CG_InitDamageNumbers() {
+	damage_numbers_head = 0;
+	for( DamageNumber & dn : damage_numbers ) {
+		dn.damage = 0;
+	}
+	damage_numbers_rng = new_pcg();
+}
+
+void CG_AddDamageNumber( entity_state_t * ent ) {
+
+    if( !cg_damageNumbers->integer )
+		return;
+
+    if( !cg_damageNumbersDistance->integer )
+		return;        
+
+    if( cg_damageNumbersDistance->integer < 1 || cg_damageNumbersDistance->integer > 200 ) {
+    	cg_damageNumbersDistance->integer = 48;
+        }
+
+	DamageNumber * dn = &damage_numbers[ damage_numbers_head ];
+	VectorCopy( ent->origin, dn->origin );
+	dn->t = cg.time;
+	dn->damage = ent->damage;
+
+	float distance_jitter = 4;
+	dn->origin[ 0 ] += random_float( &damage_numbers_rng ) * distance_jitter * 2 - distance_jitter;
+	dn->origin[ 1 ] += random_float( &damage_numbers_rng ) * distance_jitter * 2 - distance_jitter;
+	dn->origin[ 2 ] += cg_damageNumbersDistance->integer;
+	dn->drift = random_float( &damage_numbers_rng ) * 2 - 1;
+
+	damage_numbers_head = ( damage_numbers_head + 1 ) % ARRAY_COUNT( damage_numbers );
+}
+
+void CG_DrawDamageNumbers() {
+	for( const DamageNumber & dn : damage_numbers ) {
+		if( dn.damage == 0 )
+			continue;
+
+		float lifetime = 500.0f + 5 * dn.damage;
+		float frac = ( cg.time - dn.t ) / lifetime;
+		if( frac > 1 )
+			continue;
+
+		vec3_t o;
+		VectorCopy( dn.origin, o );
+		o[ 2 ] += frac * 32;
+
+		vec2_t coords;
+		trap_R_TransformVectorToScreen( &cg.view.refdef, o, coords );
+		if( ( coords[ 0 ] < 0 || coords[ 0 ] > cgs.vidWidth ) || ( coords[ 1 ] < 0 || coords[ 1 ] > cgs.vidHeight ) ) {
+			continue;
+		}
+
+		coords[ 0 ] += dn.drift * frac * 8;
+
+		vec4_t color;
+
+        if ( cg_damageNumbersColor->integer == 0 ) // white
+			{
+		Vector4Copy( colorWhite, color );
+            }
+      	else if ( cg_damageNumbersColor->integer == 1 ) // black
+			{
+		Vector4Copy( colorBlack, color );
+			}
+      	else if ( cg_damageNumbersColor->integer == 2 ) // red
+			{
+		Vector4Copy( colorRed, color );
+			}            
+      	else if ( cg_damageNumbersColor->integer == 3 ) // green
+			{
+		Vector4Copy( colorGreen, color );
+			}
+      	else if ( cg_damageNumbersColor->integer == 4 ) // blue
+			{
+		Vector4Copy( colorBlue, color );
+			}
+      	else if ( cg_damageNumbersColor->integer == 5 ) // yellow
+			{
+		Vector4Copy( colorYellow, color );
+			}
+      	else if ( cg_damageNumbersColor->integer == 6 ) // orange
+			{
+		Vector4Copy( colorOrange, color );
+			}
+      	else if ( cg_damageNumbersColor->integer == 7 ) // magenta
+			{
+		Vector4Copy( colorMagenta, color );
+			}
+      	else if ( cg_damageNumbersColor->integer == 8 ) // cyan
+			{
+		Vector4Copy( colorCyan, color );
+			}
+      	else if ( cg_damageNumbersColor->integer == 9 ) // ltgrey
+			{
+		Vector4Copy( colorLtGrey, color );
+			}
+      	else if ( cg_damageNumbersColor->integer == 10 ) // mdgrey
+			{
+		Vector4Copy( colorMdGrey, color );
+			}
+      	else if ( cg_damageNumbersColor->integer == 11 ) // dkgrey
+			{
+		Vector4Copy( colorDkGrey, color );
+			}            
+       	else
+			{
+		Vector4Copy( colorYellow, color ); // yellow
+			}
+
+		float alpha = 1 - max( 0, frac - 0.75f ) / 0.25f;
+		color[ 3 ] *= alpha;
+
+		char buf[ 16 ];
+		
+		Q_snprintfz( buf, sizeof( buf ), "%d", dn.damage );
+
+        if( !cg_damageNumbersOffset )
+		return;
+
+        if( cg_damageNumbersOffset->integer < 1 || cg_damageNumbersOffset->integer > 5 ) {
+	    cg_damageNumbersOffset->integer = 1;
+        }
+
+       	int shadowOffset = cg_damageNumbersOffset->integer * cgs.vidHeight / 600;
+       	if( !shadowOffset )
+		shadowOffset = 1;
+		
+        if( !cg_damageNumbersSize->integer )
+		return;
+
+      	if ( cg_damageNumbersSize->integer == 1 ) // tiny
+			{
+        trap_SCR_DrawString( coords[0] + shadowOffset, coords[1] + shadowOffset, ALIGN_CENTER_TOP, buf, cgs.fontSystemTiny, colorBlack );
+  		trap_SCR_DrawString( coords[0], coords[1], ALIGN_CENTER_TOP, buf, cgs.fontSystemTiny, color );   
+			}
+      	else if ( cg_damageNumbersSize->integer == 2 ) // small
+			{
+	  	trap_SCR_DrawString( coords[0] + shadowOffset, coords[1] + shadowOffset, ALIGN_CENTER_TOP, buf, cgs.fontSystemSmall, colorBlack );
+  		trap_SCR_DrawString( coords[0], coords[1], ALIGN_CENTER_TOP, buf, cgs.fontSystemSmall, color ); 
+			}
+      	else if ( cg_damageNumbersSize->integer == 3 ) // medium
+			{
+		trap_SCR_DrawString( coords[0] + shadowOffset, coords[1] + shadowOffset, ALIGN_CENTER_TOP, buf, cgs.fontSystemMedium, colorBlack );
+  		trap_SCR_DrawString( coords[0], coords[1], ALIGN_CENTER_TOP, buf, cgs.fontSystemMedium, color );  
+			}
+      	else if ( cg_damageNumbersSize->integer == 4 ) // large
+			{
+    	trap_SCR_DrawString( coords[0] + shadowOffset, coords[1] + shadowOffset, ALIGN_CENTER_TOP, buf, cgs.fontSystemBig, colorBlack );
+  		trap_SCR_DrawString( coords[0], coords[1], ALIGN_CENTER_TOP, buf, cgs.fontSystemBig, color );  
+			}
+       	else
+			{
+		trap_SCR_DrawString( coords[0] + shadowOffset, coords[1] + shadowOffset, ALIGN_CENTER_TOP, buf, cgs.fontSystemSmall, colorBlack );
+  		trap_SCR_DrawString( coords[0], coords[1], ALIGN_CENTER_TOP, buf, cgs.fontSystemSmall, color );   
+			}
 	}
 }
 

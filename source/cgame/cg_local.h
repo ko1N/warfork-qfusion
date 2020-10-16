@@ -779,6 +779,10 @@ void CG_DrawNet( int x, int y, int w, int h, int align, vec4_t color );
 
 void CG_GameMenu_f( void );
 
+void CG_InitDamageNumbers();
+void CG_AddDamageNumber( entity_state_t * ent );
+void CG_DrawDamageNumbers();
+
 void CG_ClearPointedNum( void );
 
 /**
@@ -843,6 +847,11 @@ extern cvar_t *cg_showClamp;
 
 // wsw
 extern cvar_t *cg_showObituaries;
+extern cvar_t *cg_damageNumbers;
+extern cvar_t *cg_damageNumbersSize;
+extern cvar_t *cg_damageNumbersColor;
+extern cvar_t *cg_damageNumbersDistance;
+extern cvar_t *cg_damageNumbersOffset;
 extern cvar_t *cg_volume_hitsound;    // hit sound volume
 extern cvar_t *cg_autoaction_demo;
 extern cvar_t *cg_autoaction_screenshot;
