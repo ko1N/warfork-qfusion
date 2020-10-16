@@ -103,7 +103,7 @@ r_imginfo_t LoadTGA( const char *name, uint8_t *( *allocbuf )( void *, size_t, c
 /*
 * WriteTGA
 */
-bool WriteTGA( const char *name, r_imginfo_t *info, int quality ) {
+bool WriteTGA( const char *name, r_imginfo_t *info ) {
 	int file;
 
 	if( ri.FS_FOpenAbsoluteFile( name, &file, FS_WRITE ) == -1 ) {
@@ -126,6 +126,29 @@ bool WriteTGA( const char *name, r_imginfo_t *info, int quality ) {
 */
 r_imginfo_t LoadJPG( const char *name, uint8_t *( *allocbuf )( void *, size_t, const char *, int ), void *uptr ) {
 	return R_LoadSTB( name, allocbuf, uptr );
+}
+
+/*
+* WritePNG
+*/
+bool WritePNG( const char *name, r_imginfo_t *info )
+{
+	int file;
+
+	if( ri.FS_FOpenAbsoluteFile( name, &file, FS_WRITE ) == -1 ) {
+		Com_Printf( "WritePNG: Couldn't create %s\n", name );
+		return false;
+	}
+
+	if( !stbi_write_png_to_func( &R_WriteSTBFunc, (void *)( (intptr_t)file ), info->width, info->height, info->samples,
+			info->pixels, 0 ) ) {
+		Com_Printf( "WritePNG: Couldn't write to %s\n", name );
+		ri.FS_FCloseFile( file );
+		return false;
+	}
+
+	ri.FS_FCloseFile( file );
+	return true;
 }
 
 /*
