@@ -3028,6 +3028,7 @@ static const cg_layoutcommand_t cg_LayoutCommands[] =
 	{
 		"drawDamageNumbers",
 		CG_LFuncDrawDamageNumbers,
+        NULL,
 		0,
 		"Draws damage numbers",
 		false
