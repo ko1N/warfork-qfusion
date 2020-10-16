@@ -1202,7 +1202,7 @@ static void R_Register( const char *screenshotsPrefix ) {
 	r_texturecompression = ri.Cvar_Get( "r_texturecompression", "0", CVAR_ARCHIVE | CVAR_LATCH_VIDEO );
 	r_stencilbits = ri.Cvar_Get( "r_stencilbits", "0", CVAR_ARCHIVE | CVAR_LATCH_VIDEO );
 
-	r_screenshot_format = ri.Cvar_Get( "r_screenshot_format", "jpg", CVAR_ARCHIVE );
+	r_screenshot_format = ri.Cvar_Get( "r_screenshot_format", "png", CVAR_ARCHIVE );
 	r_screenshot_jpeg_quality = ri.Cvar_Get( "r_screenshot_jpeg_quality", "90", CVAR_ARCHIVE );
 	r_screenshot_fnfmt = ri.Cvar_Get( "r_screenshot_fnfmt", va_r( tmp, sizeof( tmp ), "%s%%y%%m%%d_%%H%%M%%S", screenshotsPrefix ), CVAR_ARCHIVE );
 
