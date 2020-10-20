@@ -31,6 +31,8 @@ build_script:
 
     IF "%USE_SDL2%"=="1" cp libsrcs/lib/win32/%BUILD_PLATFORM%/release/SDL2.dll source\build\Release
 
+    IF "%BUILD_PLATFORM%"=="x64" cp -r basewf source\build\Release\
+
     cd source\build\Release
 
     >>commit.txt echo %APPVEYOR_REPO_COMMIT%
