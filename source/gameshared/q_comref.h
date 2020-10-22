@@ -217,7 +217,7 @@ typedef struct {
 //==============================================
 
 // masterservers cvar is shared by client and server. This ensures both have the same default string
-#define DEFAULT_MASTER_SERVERS_IPS          "master1.warfork.com master2.warfork.com"
+#define DEFAULT_MASTER_SERVERS_IPS          "master1.warfork.com master2.warfork.com master1.forbidden.gg master1.icy.gg"
 #define DEFAULT_MASTER_SERVERS_STEAM_IPS    ""
 #define SERVER_PINGING_TIMEOUT              50
 #define LAN_SERVER_PINGING_TIMEOUT          20
