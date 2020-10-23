@@ -845,7 +845,7 @@ static void CG_RegisterVariables( void ) {
 	cg_teamPLAYERScolor->modified = true;
 	cg_teamPLAYERScolorForce->modified = true;
 
-	cg_teamALPHAmodel = trap_Cvar_Get( "cg_teamALPHAmodel", "bigvic", CVAR_ARCHIVE );
+	cg_teamALPHAmodel = trap_Cvar_Get( "cg_teamALPHAmodel", "hamilton", CVAR_ARCHIVE );
 	cg_teamALPHAmodelForce = trap_Cvar_Get( "cg_teamALPHAmodelForce", "1", CVAR_ARCHIVE );
 	cg_teamALPHAskin = trap_Cvar_Get( "cg_teamALPHAskin", DEFAULT_PLAYERSKIN, CVAR_ARCHIVE );
 	cg_teamALPHAcolor = trap_Cvar_Get( "cg_teamALPHAcolor", DEFAULT_TEAMALPHA_COLOR, CVAR_ARCHIVE );
@@ -854,7 +854,7 @@ static void CG_RegisterVariables( void ) {
 	cg_teamALPHAskin->modified = true;
 	cg_teamALPHAcolor->modified = true;
 
-	cg_teamBETAmodel = trap_Cvar_Get( "cg_teamBETAmodel", "padpork", CVAR_ARCHIVE );
+	cg_teamBETAmodel = trap_Cvar_Get( "cg_teamBETAmodel", "rufus", CVAR_ARCHIVE );
 	cg_teamBETAmodelForce = trap_Cvar_Get( "cg_teamBETAmodelForce", "1", CVAR_ARCHIVE );
 	cg_teamBETAskin = trap_Cvar_Get( "cg_teamBETAskin", DEFAULT_PLAYERSKIN, CVAR_ARCHIVE );
 	cg_teamBETAcolor = trap_Cvar_Get( "cg_teamBETAcolor", DEFAULT_TEAMBETA_COLOR, CVAR_ARCHIVE );
