@@ -39,6 +39,7 @@ static const r_imginfo_t empty_imginfo = { 0 };
 */
 void R_Imagelib_Init( void ) {
 	stbi_flip_vertically_on_write( 1 );
+	stbi_write_tga_with_rle = 0;
 }
 
 /*
