@@ -221,7 +221,7 @@ typedef struct {
 #define DEFAULT_MASTER_SERVERS_STEAM_IPS    ""
 #define SERVER_PINGING_TIMEOUT              50
 #define LAN_SERVER_PINGING_TIMEOUT          20
-#define DEFAULT_PLAYERMODEL                 "bigvic"
+#define DEFAULT_PLAYERMODEL                 "rufus"
 #define DEFAULT_PLAYERSKIN                  "default"
 
 #ifdef UCMDTIMENUDGE

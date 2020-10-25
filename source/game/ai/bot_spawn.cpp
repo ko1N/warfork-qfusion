@@ -37,11 +37,11 @@ in NO WAY supported by Steve Yeager.
 // and force the default one later on
 static const char * const LocalBotSkins[] =
 {
-	"bigvic/default",
-	"bigvic/default2",
-	"bigvic/default3",
-	"bigvic/default4",
-	"bigvic/default5",
+	"rufus/default",
+	"rufus/default2",
+	"rufus/default3",
+	"rufus/default4",
+	"rufus/default5",
 
 	"monada/default",
 	"monada/default1",
@@ -300,7 +300,7 @@ static void BOT_CreateUserinfo( char *userinfo, size_t userinfo_size, int bot_pe
 		// randomly choose skin
 		r = random();
 		if( r > 0.8f )
-			Q_snprintfz( bot_model, sizeof( bot_model ), "bigvic" );
+			Q_snprintfz( bot_model, sizeof( bot_model ), "rufus" );
 		else if( r > 0.6f )
 			Q_snprintfz( bot_model, sizeof( bot_model ), "padpork" );
 		else if( r > 0.4f )

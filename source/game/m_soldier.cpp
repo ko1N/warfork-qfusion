@@ -148,7 +148,7 @@ void SP_monster_soldier( edict_t *self )
 {
 	VectorCopy( playerbox_stand_mins, self->r.mins );
 	VectorCopy( playerbox_stand_maxs, self->r.maxs );
-	self->s.modelindex = trap_ModelIndex( "$models/players/bigvic" );
+	self->s.modelindex = trap_ModelIndex( "$models/players/rufus" );
 	self->r.solid = SOLID_YES;
 	self->movetype = MOVETYPE_STEP;
 	self->s.type = ET_MONSTER_PLAYER;
