@@ -162,6 +162,7 @@ static cvar_t *fs_basepath;
 static cvar_t *fs_cdpath;
 static cvar_t *fs_usehomedir;
 static cvar_t *fs_usedownloadsdir;
+static cvar_t *fs_useworkshopdir;
 static cvar_t *fs_basegame;
 static cvar_t *fs_game;
 
@@ -4448,6 +4449,7 @@ static void Cmd_FileMTime_f( void ) {
 void FS_Init( void ) {
 	int i;
 	const char *homedir;
+    const char *workshopdir;
 	const char *cachedir;
 	char downloadsdir[FS_MAX_PATH];
 
@@ -4492,6 +4494,18 @@ void FS_Init( void ) {
 	{ fs_usehomedir = Cvar_Get( "fs_usehomedir", "0", CVAR_NOSET );}
 #endif
 	fs_usedownloadsdir = Cvar_Get( "fs_usedownloadsdir", "1", CVAR_NOSET );
+
+	workshopdir = Sys_FS_GetSteamWorkshopDirectory();
+	if( workshopdir != NULL )
+#ifdef PUBLIC_BUILD
+	fs_useworkshopdir = Cvar_Get( "fs_useworkshopdir", "1", CVAR_NOSET );
+#else
+	fs_useworkshopdir = Cvar_Get( "fs_useworkshopdir", "0", CVAR_NOSET );
+#endif
+
+	if( workshopdir != NULL && fs_useworkshopdir->integer ) {
+		FS_AddBasePath( workshopdir );
+	}
 
 	fs_downloads_searchpath = NULL;
 	if( fs_usedownloadsdir->integer ) {
