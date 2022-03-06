@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
 
-  build-windows:
+  build-linux:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -12,14 +12,15 @@ jobs:
       - name: Install build dependencies
         run: sudo apt-get install -y curl clang cmake build-essential libsdl2-dev libopenal-dev libvorbis-dev libtheora-dev libfreetype6-dev zlib1g-dev libcurl4-gnutls-dev git zip unzip
 
-      - name: Download steamworks sdk
-        run: |
-          curl https://warfork.com/downloads/sdk/ --output third-party/steamworks/sdk.zip
-          unzip third-party/steamworks/sdk.zip -d third-party/steamworks
+      #- name: Download steamworks sdk
+      #  run: |
+      #    curl https://warfork.com/downloads/sdk/ --output third-party/steamworks/sdk.zip
+      #    unzip third-party/steamworks/sdk.zip -d third-party/steamworks
 
       - name: Generate makefiles
         working-directory: ./source
-        run: cmake -DBUILD_STEAMLIB=1 .
+        #run: cmake -DBUILD_STEAMLIB=1 .
+        run: cmake .
 
       - name: Build project
         working-directory: ./source
