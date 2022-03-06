@@ -39,6 +39,7 @@ jobs:
           name: linux-x86_64-release
           path: source/Linux-x86_64-Release.tar.gz
 
+  build-osx:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
