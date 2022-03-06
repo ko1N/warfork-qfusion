@@ -65,7 +65,7 @@ jobs:
 
       - name: Build project
         working-directory: ./source
-        run: xcodebuild -project qfusion.xcodeproj/ -jobs 4 -configuration Release -target ALL_BUILD
+        run: xcodebuild -project qfusion.xcodeproj/ -jobs 4 -configuration Release -target ALL_BUILD CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
       
       - name: Package warfork
         working-directory: ./source/build
